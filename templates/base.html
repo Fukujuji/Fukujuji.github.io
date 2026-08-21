@@ -22,7 +22,13 @@
   <meta name="twitter:card" content="summary_large_image">
 
   {# 閲覧元URLの外部漏れを絞る。GitHub Pages はレスポンスヘッダを設定できないため、
-     セキュリティ関連で meta から実効性のある指定はこれくらい #}
+     セキュリティ関連の指定は meta で行うしかない。
+     なお CSP は <meta http-equiv="Content-Security-Policy"> で有効に設定できる
+     （meta で効かないのは frame-ancestors / report-uri / sandbox のみ）。
+     ただし本サイトはインラインの style / script を前提にしており 'unsafe-inline' が要るため、
+     XSS防御としての効果は限定的。入れるなら base-uri / object-src / form-action の
+     締めに実益がある。現状は外部依存がほぼ無く扱うデータも公開情報のみのため見送っている。
+     X-Frame-Options は meta では機能しない（ヘッダ専用）。 #}
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <link rel="canonical" href="{{ site_base_url }}/{{ self.og_path() }}">

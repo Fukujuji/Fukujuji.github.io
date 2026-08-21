@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}名勝庭園 ─ 福寿寺{% endblock %}
+{% block description %}滋賀県指定名勝「福寿寺庭園」。延宝年間、黄檗宗として復興した際に造営された蓬莱式池泉鑑賞式庭園で、豪快な石組と琵琶湖東南の山々を借景に取り込んだ約百九十坪の景観です。{% endblock %}
+{% block og_path %}garden.html{% endblock %}
+{% block extra_style %}
+.garden-hero {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.garden-hero-img {
+  width: 100%;
+  height: 320px;
+}
+.garden-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(20,40,20,0.75));
+  padding: 24px 28px;
+  color: #f0f5e8;
+}
+.garden-hero-overlay .designation {
+  font-size: 0.82rem;
+  color: #a8c880;
+  margin-bottom: 4px;
+}
+.garden-hero-overlay .title {
+  font-size: 1.4rem;
+  letter-spacing: 0.2em;
+}
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.spec-item {
+  background: #fdf5e8;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+.spec-item .label {
+  font-size: 0.78rem;
+  color: #888;
+  margin-bottom: 4px;
+}
+.spec-item .value {
+  font-size: 1rem;
+  color: #4a2c0a;
+}
+.photo-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+blockquote {
+  border-left: 3px solid #c8a465;
+  padding: 12px 16px;
+  margin: 20px 0;
+  background: #fdf5e8;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.92rem;
+  color: #555;
+  font-style: italic;
+}
+{% endblock %}
+
+{% block content %}
+<h2>名勝 福寿寺庭園</h2>
+
+<div class="garden-hero">
+  <img class="garden-hero-img" src="{{ url_for('static', filename='hp/img/card_garden.jpg') }}" alt="福寿寺庭園 全景" style="object-fit:cover;">
+  <div class="garden-hero-overlay">
+    <p class="designation">滋賀県指定名勝</p>
+    <p class="title">福 寿 寺 庭 園</p>
+  </div>
+</div>
+
+<div class="spec-grid">
+  <div class="spec-item">
+    <div class="label">指定</div>
+    <div class="value">滋賀県指定名勝</div>
+  </div>
+  <div class="spec-item">
+    <div class="label">形式</div>
+    <div class="value">蓬莱式池泉鑑賞式</div>
+  </div>
+  <div class="spec-item">
+    <div class="label">造営時期</div>
+    <div class="value">延宝年間（江戸前期）</div>
+  </div>
+  <div class="spec-item">
+    <div class="label">規模</div>
+    <div class="value">約190坪</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0;">庭園の特徴</h3>
+  <p style="font-size:0.92rem; margin-top:10px;">
+    延宝年間、黄檗宗として復興した際に造営された池泉鑑賞式庭園です。
+    細長い池泉の中に亀島・鶴島的な岩島を配置し、
+    亀頭石・切石橋二橋・枯滝石組・蓬莱石組を備えています。
+  </p>
+  <p style="font-size:0.92rem; margin-top:10px;">
+    豪快な石組みが庭全体を覆い、自然の巨石を大胆に組んだ構成は
+    この庭園の最大の特徴です。
+    琵琶湖の湖東・湖南に連なる山々を借景として取り込んだ雄大な景観が広がります。
+  </p>
+
+  <p style="font-size:0.92rem; margin-top:14px;">
+    「<strong>湖国名園四十三庭</strong>」に選定されています。
+    江戸前期の国学者・俳人 <strong>北村季吟</strong>（1624〜1705）が
+    この庭の風趣を讃える文章を残しています。
+  </p>
+
+  <div class="photo-pair" style="margin-top:18px;">
+    <img src="{{ url_for('static', filename='hp/img/garden_stones.jpg') }}" alt="庭園 石組み" style="height:180px; border-radius:6px; width:100%; object-fit:cover;" loading="lazy">
+    <img src="{{ url_for('static', filename='hp/img/garden_bridge.jpg') }}" alt="庭園 渡り廊下・通幽橋" style="height:180px; border-radius:6px; width:100%; object-fit:cover;" loading="lazy">
+  </div>
+</div>
+{% endblock %}

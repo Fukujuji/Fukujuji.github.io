@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fukujuji.github.io/sitemap.xml

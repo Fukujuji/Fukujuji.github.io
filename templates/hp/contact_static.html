@@ -1,0 +1,254 @@
+{# GitHub Pages 用の静的版お問い合わせページ。
+   静的サイトはPOSTを受けられないため、Google Apps Script のウェブアプリへ fetch で送る。
+   フォームの見た目はFlask版（contact.html）と同一に保っている。
+   エンドポイントは local_config.json の GAS_ENDPOINT_URL で与える。
+   GAS側のコードは gas/contact_endpoint.gs を参照。 #}
+{% extends "base.html" %}
+{% block title %}お問い合わせ ─ 福寿寺{% endblock %}
+{% block description %}福寿寺へのお問い合わせ。拝観・法事・永代供養・ペット合葬墓のご相談を承っております。お電話は 0748-37-0688、フォームからもお送りいただけます。{% endblock %}
+{% block og_path %}contact.html{% endblock %}
+{% block extra_style %}
+.contact-form {
+  background: #fff;
+  border: 1px solid #e8dcc8;
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #6b3f1a;
+  margin-bottom: 6px;
+}
+.form-group .required {
+  color: #8b0000;
+  font-size: 0.78rem;
+  margin-left: 6px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #faf8f3;
+  box-sizing: border-box;
+}
+.form-group textarea {
+  height: 160px;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #c8a465;
+}
+.form-note {
+  font-size: 0.82rem;
+  color: #888;
+  margin-bottom: 24px;
+}
+.alert {
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 0.92rem;
+}
+.alert-success {
+  background: #eaf5ea;
+  border: 1px solid #a3d4a3;
+  color: #2d6a2d;
+}
+.alert-error {
+  background: #fdf0f0;
+  border: 1px solid #e8a0a0;
+  color: #8b0000;
+}
+/* 送信中は二度押しを防ぐ。押した手応えを見せるためのスピナー付き */
+#submit-btn[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}
+.spinner {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 8px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  vertical-align: -0.1em;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}
+.setup-note {
+  background: #fdf0f0;
+  border: 1px solid #e8a0a0;
+  color: #8b0000;
+  border-radius: 6px;
+  padding: 18px;
+  font-size: 0.9rem;
+  max-width: 640px;
+  margin: 0 auto 20px;
+}
+{% endblock %}
+
+{% block content %}
+<h2>お問い合わせ</h2>
+
+<p class="section-lead">
+  拝観・法事・その他のご相談はお気軽にお問い合わせください。<br>
+  お電話でのお問い合わせは <strong>0748-37-0688</strong> までどうぞ。
+</p>
+
+{% if preview_mock %}
+<div class="setup-note" style="background:#fff3cd; border-color:#ffe08a; color:#7a5c00;">
+  <strong>【プレビュー】</strong> これは動作確認用のビルドです。
+  送信ボタンを押しても<strong>実際には何も送信されません</strong>（メールもNotion記録も行いません）。
+  入力チェックと送信中の表示、完了メッセージまでの流れだけ確認できます。
+</div>
+{% elif not gas_endpoint_url %}
+<div class="setup-note">
+  <strong>【未設定】</strong> 送信先のエンドポイントが設定されていません。<br>
+  <code>local_config.json</code> の <code>GAS_ENDPOINT_URL</code> に、Google Apps Script を
+  ウェブアプリとしてデプロイして得られる
+  <code>https://script.google.com/macros/s/.../exec</code> を設定してから、
+  静的サイトを再生成してください。手順は <code>gas/contact_endpoint.gs</code> の冒頭にあります。
+</div>
+{% endif %}
+
+<div id="alert-area"></div>
+
+<div class="contact-form" id="form-wrap">
+  <p class="form-note">※ 印は必須項目です</p>
+  <form id="contact-form" novalidate>
+    {# honeypot: 人間は見えない・入力しない。ボットは埋めてしまう #}
+    <div style="display:none;" aria-hidden="true">
+      <input type="text" name="website" value="" tabindex="-1" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label for="f-name">お名前<span class="required">※</span></label>
+      <input type="text" id="f-name" name="name" required maxlength="100" autocomplete="name">
+    </div>
+    <div class="form-group">
+      <label for="f-email">メールアドレス<span class="required">※</span></label>
+      <input type="email" id="f-email" name="email" required maxlength="200" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label for="f-message">お問い合わせ内容<span class="required">※</span></label>
+      <textarea id="f-message" name="message" required maxlength="2000"></textarea>
+    </div>
+    {# 送信前に利用目的が目に入るようにする。フッターのリンクだけでは弱いため。
+       宗教活動目的なら個人情報保護法57条1項3号で21条2項の義務は適用除外だが、
+       当サイトは会場利用など宗教活動と言い難い相談も受けるため明示しておく。 #}
+    <p class="form-note" style="margin:16px 0 12px;">
+      お預かりした個人情報は、お問い合わせへの回答とその記録のためにのみ利用いたします。
+      詳しくは<a href="/privacy">個人情報の取扱いについて</a>をご覧ください。
+    </p>
+    <button type="submit" id="submit-btn" class="btn btn-primary" style="width:100%; padding:12px;">
+      送信する
+    </button>
+  </form>
+</div>
+
+<script>
+(function () {
+  var ENDPOINT = {{ (gas_endpoint_url or '')|tojson }};
+
+  var form   = document.getElementById('contact-form');
+  var wrap   = document.getElementById('form-wrap');
+  var btn    = document.getElementById('submit-btn');
+  var alerts = document.getElementById('alert-area');
+
+  function showAlert(kind, html) {
+    alerts.innerHTML = '<div class="alert alert-' + kind + '">' + html + '</div>';
+    alerts.scrollIntoView({ block: 'nearest' });
+  }
+
+  function busy(on) {
+    btn.disabled = on;
+    btn.innerHTML = on ? '<span class="spinner"></span>送信中…' : '送信する';
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+{%- if not preview_mock %}
+    if (!ENDPOINT) {
+      showAlert('error', '送信先が設定されていません。お手数ですが、お電話にてご連絡ください。');
+      return;
+    }
+{%- endif %}
+
+    var name    = form.name.value.trim();
+    var email   = form.email.value.trim();
+    var message = form.message.value.trim();
+
+    var errors = [];
+    if (!name || name.length > 100) errors.push('お名前を100文字以内で入力してください。');
+    if (!email || email.length > 200 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      errors.push('正しいメールアドレスを入力してください。');
+    }
+    if (!message || message.length > 2000) errors.push('お問い合わせ内容を2000文字以内で入力してください。');
+    if (errors.length) {
+      showAlert('error', errors.map(function (e) {
+        return '<p style="margin:0 0 4px;">' + e + '</p>';
+      }).join(''));
+      return;
+    }
+
+    busy(true);
+{%- if preview_mock %}
+
+    // ── プレビュー専用の疑似送信。本番ビルドにはこのブロックは出力されない ──
+    setTimeout(function () {
+      wrap.style.display = 'none';
+      showAlert('success',
+        'お問い合わせを受け付けました。内容を確認の上、ご連絡いたします。' +
+        '<br><small>（プレビューのため実際には送信されていません）</small>');
+    }, 800);
+    return;
+{%- endif %}
+
+    // Content-Type を text/plain にすることで CORS のプリフライト(OPTIONS)を発生させない。
+    // GAS はプリフライトに応答できないため、これを避けるのが要点。
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        message: message,
+        website: form.website.value
+      })
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data && data.result === 'success') {
+          wrap.style.display = 'none';
+          showAlert('success', 'お問い合わせを受け付けました。内容を確認の上、ご連絡いたします。');
+        } else if (data && data.reason === 'rate_limited') {
+          busy(false);
+          showAlert('error', '送信が集中しています。しばらく時間をおいてからお試しください。');
+        } else {
+          busy(false);
+          showAlert('error', '送信中にエラーが発生しました。お手数ですが、お電話にてご連絡ください。');
+        }
+      })
+      .catch(function () {
+        busy(false);
+        showAlert('error', '送信できませんでした。通信環境をご確認いただくか、お電話にてご連絡ください。');
+      });
+  });
+})();
+</script>
+{% endblock %}

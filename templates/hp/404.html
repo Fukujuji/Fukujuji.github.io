@@ -1,0 +1,53 @@
+{# GitHub Pages はサイトルートの 404.html を自動で使う。
+   これが無いとGitHub標準の英語の404が出て、サイトへ戻る導線が失われる。 #}
+{% extends "base.html" %}
+{% block title %}ページが見つかりません ─ 福寿寺{% endblock %}
+{% block description %}お探しのページは見つかりませんでした。福寿寺のホームページよりお探しください。{% endblock %}
+{% block og_path %}404.html{% endblock %}
+{% block extra_style %}
+.notfound {
+  text-align: center;
+  padding: 48px 24px 40px;
+}
+.notfound .code {
+  font-size: 3.2rem;
+  color: #c8a465;
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+.notfound h2 {
+  border: none;
+  padding: 0;
+  justify-content: center;
+  display: block;
+  margin-bottom: 16px;
+}
+.notfound p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 2;
+  margin-bottom: 28px;
+}
+.notfound-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+{% endblock %}
+
+{% block content %}
+<div class="notfound">
+  <p class="code">404</p>
+  <h2>ページが見つかりません</h2>
+  <p>
+    お探しのページは移動または削除された可能性がございます。<br>
+    お手数ですが、下記よりお進みください。
+  </p>
+  <div class="notfound-links">
+    <a href="/" class="btn btn-primary">ホームへ戻る</a>
+    <a href="/access" class="btn">交通案内</a>
+    <a href="/contact" class="btn">お問い合わせ</a>
+  </div>
+</div>
+{% endblock %}

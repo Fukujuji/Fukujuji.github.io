@@ -1,0 +1,9 @@
+{
+  "_comment": "このファイルを local_config.json にコピーして、実際の値を入れてください。local_config.json は .gitignore 済みで、GitHubには公開されません。",
+
+  "GAS_ENDPOINT_URL": "お問い合わせを受けるGoogle Apps ScriptのウェブアプリURL（https://script.google.com/macros/s/.../exec）。設定手順は gas/contact_endpoint.gs の冒頭を参照",
+
+  "_optional_SITE_BASE_URL": "公開サイトのURL。省略すると app.py の既定値 https://fukujuji.github.io が使われます。OGP・canonical・sitemap.xml の絶対URLに使用します（末尾スラッシュなし）",
+
+  "_note_gas": "通知先メールアドレスとNotionのトークン・ページIDは、GASプロジェクトの「スクリプト プロパティ」に登録します。このファイルには書きません。"
+}

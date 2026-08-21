@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% block title %}福寿寺 ─ 黄檗宗 巌蔵山{% endblock %}
+{% block og_path %}{% endblock %}
+{% block extra_style %}
+.hero {
+  position: relative;
+  color: #f5efe6;
+  text-align: center;
+  margin: -32px -24px 32px;
+  overflow: hidden;
+}
+.hero-img {
+  width: 100%;
+  height: 360px;
+  background: #4a2c0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a07040;
+  font-size: 0.9rem;
+}
+.hero-img::before { content: '📷 '; }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 15, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.hero h2 {
+  border: none;
+  color: #f5efe6;
+  font-size: 2.2rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.hero .sub {
+  color: #c8a465;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+}
+.hero .lead {
+  margin-top: 16px;
+  font-size: 0.92rem;
+  color: #eee;
+  line-height: 2;
+}
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+.feature-card {
+  background: #fff;
+  border: 1px solid #e8dcc8;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.feature-card-img {
+  width: 100%;
+  height: 160px;
+}
+.feature-card-body {
+  padding: 18px 20px;
+  text-align: center;
+}
+.feature-card h3 {
+  border: none;
+  padding: 0;
+  text-align: center;
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+.feature-card p {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 14px;
+}
+{% endblock %}
+
+{% block content %}
+{# 構造化データ。検索エンジンに「寺院」であることと所在地・連絡先を機械可読で伝える。
+   schema.org の BuddhistTemple（PlaceOfWorship の下位型）を使う。
+   緯度経度は正確な値が確認できていないため、あえて記載しない。 #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BuddhistTemple",
+  "name": "福寿寺",
+  "alternateName": ["巌蔵山 福寿寺", "がんぞうざん ふくじゅじ"],
+  "description": "滋賀県近江八幡市の黄檗宗寺院。天長六年（八二九年）開創。国指定重要文化財の木造千手観音立像「いわくら観音」と、滋賀県指定名勝の庭園を伝える。",
+  "url": "{{ site_base_url }}/",
+  "image": "{{ site_base_url }}/static/hp/img/og_image.jpg",
+  "telephone": "+81-748-37-0688",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "JP",
+    "postalCode": "523-0022",
+    "addressRegion": "滋賀県",
+    "addressLocality": "近江八幡市",
+    "streetAddress": "馬淵町469番地"
+  },
+  "publicAccess": true,
+  "isAccessibleForFree": true,
+  "additionalProperty": {
+    "@type": "PropertyValue",
+    "name": "拝観",
+    "value": "事前のご連絡が必要です"
+  }
+}
+</script>
+
+<div class="hero">
+  <img class="hero-img" src="{{ url_for('static', filename='hp/img/hero_main.jpg') }}" alt="福寿寺 本堂" style="object-fit:cover;">
+  <div class="hero-overlay">
+    <p class="sub">黄檗宗 巌蔵山</p>
+    <h2>福 寿 寺</h2>
+    <p class="lead">
+      天長六年（八二九年）開創<br>
+      千二百年の歴史を刻む近江の古刹<br>
+      国指定重要文化財「いわくら観音」安置
+    </p>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feature-card">
+    <img class="feature-card-img" src="{{ url_for('static', filename='hp/img/card_history.jpg') }}" alt="福寿寺 境内" style="object-fit:cover;" loading="lazy">
+    <div class="feature-card-body">
+      <h3>縁起・歴史</h3>
+      {# 「焼き討ち」だとカード幅249pxで3行に折り返し、他2枚と揃わないため「焼討」に詰めている #}
+      <p>淳和天皇の勅願による開創から<br>織田信長の焼討、黄檗宗での復興まで</p>
+      <a href="/about" class="btn btn-primary">詳しく見る</a>
+    </div>
+  </div>
+  <div class="feature-card">
+    <img class="feature-card-img" src="{{ url_for('static', filename='hp/img/card_kannon.jpg') }}" alt="本尊 千手観音立像" style="object-fit:cover;" loading="lazy">
+    <div class="feature-card-body">
+      <h3>寺宝・文化財</h3>
+      <p>国指定重要文化財<br>木造千手観音立像と附指定品</p>
+      <a href="/cultural-assets" class="btn btn-primary">詳しく見る</a>
+    </div>
+  </div>
+  <div class="feature-card">
+    <img class="feature-card-img" src="{{ url_for('static', filename='hp/img/card_garden.jpg') }}" alt="福寿寺庭園" style="object-fit:cover;" loading="lazy">
+    <div class="feature-card-body">
+      <h3>名勝庭園</h3>
+      <p>滋賀県指定名勝<br>蓬莱式池泉鑑賞式庭園（約190坪）</p>
+      <a href="/garden" class="btn btn-primary">詳しく見る</a>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="card">
+  <h2>拝観のご案内</h2>
+  <p style="margin-top:10px; font-size:0.92rem;">
+    拝観をご希望の方は、事前に<a href="/contact">お問い合わせフォーム</a>よりご連絡ください。<br>
+    会議・茶会・研修会等の会場利用もご相談いただけます。
+  </p>
+</div>
+
+<div class="card">
+  <h2>年中の主な行事</h2>
+  <div style="display:flex; gap:20px; margin-top:18px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:220px;">
+      <h3 style="margin-top:0; font-size:1rem;">花まつり・大般若祈祷会</h3>
+      <p style="font-size:0.88rem;">
+        四月上旬。お釈迦さまの誕生をお祝いするとともに、
+        大般若経を転読して皆さまのご健勝を祈願いたします。<br>
+        日程は年によって前後しますので、お越しの際は事前にお問い合わせください。
+      </p>
+    </div>
+    <div style="flex:1; min-width:220px;">
+      <h3 style="margin-top:0; font-size:1rem;">大施餓鬼</h3>
+      <p style="font-size:0.88rem;">
+        八月十六日。お盆にあわせ、有縁無縁の一切の精霊に供養を捧げる法要です。
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>ご供養のご案内</h2>
+  <p style="margin-top:10px; font-size:0.92rem;">
+    下記のご供養についてご相談を承っております。<a href="/contact">お問い合わせフォーム</a>よりご連絡ください。
+  </p>
+  <div style="display:flex; gap:20px; margin-top:18px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:220px;">
+      <img src="{{ url_for('static', filename='hp/img/eitai_kuyoto.jpg') }}" alt="永代供養塔" style="width:100%; height:160px; object-fit:cover; border-radius:6px; margin-bottom:12px; display:block;" loading="lazy">
+      <h3 style="margin-top:0; font-size:1rem;">永代供養塔</h3>
+      <p style="font-size:0.88rem;">
+        ご遺骨をお預かりし、永代にわたり当山がご供養いたします。
+        個別のお墓を設けることが難しい方や、後継者のいない方もご相談ください。
+      </p>
+    </div>
+    <div style="flex:1; min-width:220px;">
+      <img src="{{ url_for('static', filename='hp/img/pet_reien.jpg') }}" alt="ペット合葬墓の供養碑" style="width:100%; height:160px; object-fit:cover; border-radius:6px; margin-bottom:12px; display:block;" loading="lazy">
+      <h3 style="margin-top:0; font-size:1rem;">ペット合葬墓</h3>
+      <p style="font-size:0.88rem;">
+        境内にペット合葬墓を設けております。大切な家族の一員であるペットの
+        ご供養・ご埋葬についてご相談いただけます。
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

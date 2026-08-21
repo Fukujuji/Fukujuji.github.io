@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}福寿寺{% endblock %}</title>
+
+  {# 各ページで {% block description %} を上書きする。検索結果に出る説明文になる #}
+  <meta name="description" content="{% block description %}滋賀県近江八幡市の黄檗宗寺院・巌蔵山 福寿寺。天長六年（八二九年）開創の古刹で、国指定重要文化財の木造千手観音立像「いわくらさん」と、滋賀県指定名勝の庭園を伝えています。{% endblock %}">
+
+  {# OGP: LINEやSNSでURLを共有したときのカード表示に使われる。URLは絶対パスが必要 #}
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:site_name" content="巌蔵山 福寿寺">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:url" content="{{ site_base_url }}/{% block og_path %}{% endblock %}">
+  <meta property="og:image" content="{{ site_base_url }}/static/hp/img/og_image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="福寿寺 本堂">
+  <meta name="twitter:card" content="summary_large_image">
+
+  {# 閲覧元URLの外部漏れを絞る。GitHub Pages はレスポンスヘッダを設定できないため、
+     セキュリティ関連で meta から実効性のある指定はこれくらい #}
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="canonical" href="{{ site_base_url }}/{{ self.og_path() }}">
+
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-32.png') }}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS PMincho', serif;
+      background: #faf8f3;
+      color: #333;
+      line-height: 1.8;
+    }
+    a { color: #6b3f1a; }
+    a:hover { color: #c8a465; }
+
+    /* ── ヘッダー ── */
+    .site-header {
+      background: #4a2c0a;
+      color: #f5efe6;
+      padding: 0;
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .site-title {
+      font-size: 1.5rem;
+      font-weight: normal;
+      letter-spacing: 0.15em;
+    }
+    .site-title a { color: #f5efe6; text-decoration: none; }
+    .site-title small {
+      display: block;
+      font-size: 0.7rem;
+      color: #c8a465;
+      letter-spacing: 0.05em;
+    }
+    .header-nav a {
+      color: #e8dcc8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 20px;
+    }
+    .header-nav a:hover { color: #fff; }
+
+    /* ── ナビゲーション ── */
+    .main-nav {
+      background: #5a3a14;
+      border-bottom: 2px solid #c8a465;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+    }
+    .nav-inner a {
+      color: #e8dcc8;
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 10px 18px;
+      transition: background 0.2s;
+    }
+    .nav-inner a:hover, .nav-inner a.active {
+      background: #4a2c0a;
+      color: #fff;
+    }
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-wrap: wrap;
+        padding: 0;
+      }
+      .nav-inner a {
+        width: 50%;
+        padding: 12px 0;
+        text-align: center;
+        border-top: 1px solid #6b4a20;
+      }
+    }
+
+    /* ── メイン ── */
+    .main-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+
+    /* ── フッター ── */
+    .site-footer {
+      background: #4a2c0a;
+      color: #c8a465;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+    .site-footer a { color: #e8dcc8; }
+
+    /* ── 共通パーツ ── */
+    h2 {
+      color: #4a2c0a;
+      font-size: 1.3rem;
+      font-weight: normal;
+      border-bottom: 2px solid #c8a465;
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+    }
+    h3 {
+      color: #6b3f1a;
+      font-size: 1.05rem;
+      margin: 24px 0 10px;
+      padding-left: 12px;
+      border-left: 3px solid #c8a465;
+    }
+    /* カード内の大区切り。読み上げ順を自然にするため見出しレベルは h2 だが、
+       見た目は h3 と揃える（ページ見出しの h2 とは役割が違うため） */
+    .card > h2 {
+      color: #6b3f1a;
+      font-size: 1.05rem;
+      font-weight: normal;
+      margin: 0 0 10px;
+      padding: 0 0 0 12px;
+      border-bottom: none;
+      border-left: 3px solid #c8a465;
+      letter-spacing: normal;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e8dcc8;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .info-table th {
+      text-align: left;
+      background: #fdf5e8;
+      padding: 8px 14px;
+      border: 1px solid #e8dcc8;
+      font-weight: normal;
+      color: #6b3f1a;
+      width: 25%;
+      white-space: nowrap;
+    }
+    .info-table td {
+      padding: 8px 14px;
+      border: 1px solid #e8dcc8;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: #6b3f1a;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #4a2c0a; color: #fff; }
+    .section-lead {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid #e8dcc8;
+      margin: 32px 0;
+    }
+
+    {% block extra_style %}{% endblock %}
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <h1 class="site-title">
+      <a href="/">
+        <small>黄檗宗 巌蔵山</small>
+        福寿寺
+      </a>
+    </h1>
+    {% block header_right %}{% endblock %}
+  </div>
+</header>
+
+{% block navigation %}
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="/" {% if request.path == '/' %}class="active"{% endif %}>ホーム</a>
+    <a href="/about" {% if request.path == '/about' %}class="active"{% endif %}>縁起・歴史</a>
+    <a href="/cultural-assets" {% if '/cultural-assets' in request.path %}class="active"{% endif %}>寺宝・文化財</a>
+    <a href="/garden" {% if request.path == '/garden' %}class="active"{% endif %}>名勝庭園</a>
+    <a href="/access" {% if request.path == '/access' %}class="active"{% endif %}>交通案内</a>
+    <a href="/contact" {% if request.path == '/contact' %}class="active"{% endif %}>お問い合わせ</a>
+  </div>
+</nav>
+{% endblock %}
+
+<main class="main-content">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <p>黄檗宗 巌蔵山 福寿寺</p>
+  <p>〒523-0022 滋賀県近江八幡市馬淵町469番地　TEL 0748-37-0688</p>
+  <p style="margin-top:12px; font-size:0.8rem;">
+    <a href="/privacy">個人情報の取扱いについて</a>
+  </p>
+  <p style="margin-top:8px; font-size:0.75rem; color:#8a7a5a;">© 2026 宗教法人 福寿寺</p>
+</footer>
+
+</body>
+</html>

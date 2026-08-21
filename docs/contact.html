@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ ─ 福寿寺</title>
+
+  
+  <meta name="description" content="福寿寺へのお問い合わせ。拝観・法事・永代供養・ペット合葬墓のご相談を承っております。お電話は 0748-37-0688、フォームからもお送りいただけます。">
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="巌蔵山 福寿寺">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="お問い合わせ ─ 福寿寺">
+  <meta property="og:description" content="福寿寺へのお問い合わせ。拝観・法事・永代供養・ペット合葬墓のご相談を承っております。お電話は 0748-37-0688、フォームからもお送りいただけます。">
+  <meta property="og:url" content="https://fukujuji.github.io/contact.html">
+  <meta property="og:image" content="https://fukujuji.github.io/static/hp/img/og_image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="福寿寺 本堂">
+  <meta name="twitter:card" content="summary_large_image">
+
+  
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link rel="canonical" href="https://fukujuji.github.io/contact.html">
+
+  <link rel="icon" href="static/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="static/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="static/apple-touch-icon.png">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS PMincho', serif;
+      background: #faf8f3;
+      color: #333;
+      line-height: 1.8;
+    }
+    a { color: #6b3f1a; }
+    a:hover { color: #c8a465; }
+
+    /* ── ヘッダー ── */
+    .site-header {
+      background: #4a2c0a;
+      color: #f5efe6;
+      padding: 0;
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .site-title {
+      font-size: 1.5rem;
+      font-weight: normal;
+      letter-spacing: 0.15em;
+    }
+    .site-title a { color: #f5efe6; text-decoration: none; }
+    .site-title small {
+      display: block;
+      font-size: 0.7rem;
+      color: #c8a465;
+      letter-spacing: 0.05em;
+    }
+    .header-nav a {
+      color: #e8dcc8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 20px;
+    }
+    .header-nav a:hover { color: #fff; }
+
+    /* ── ナビゲーション ── */
+    .main-nav {
+      background: #5a3a14;
+      border-bottom: 2px solid #c8a465;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+    }
+    .nav-inner a {
+      color: #e8dcc8;
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 10px 18px;
+      transition: background 0.2s;
+    }
+    .nav-inner a:hover, .nav-inner a.active {
+      background: #4a2c0a;
+      color: #fff;
+    }
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-wrap: wrap;
+        padding: 0;
+      }
+      .nav-inner a {
+        width: 50%;
+        padding: 12px 0;
+        text-align: center;
+        border-top: 1px solid #6b4a20;
+      }
+    }
+
+    /* ── メイン ── */
+    .main-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+
+    /* ── フッター ── */
+    .site-footer {
+      background: #4a2c0a;
+      color: #c8a465;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+    .site-footer a { color: #e8dcc8; }
+
+    /* ── 共通パーツ ── */
+    h2 {
+      color: #4a2c0a;
+      font-size: 1.3rem;
+      font-weight: normal;
+      border-bottom: 2px solid #c8a465;
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+    }
+    h3 {
+      color: #6b3f1a;
+      font-size: 1.05rem;
+      margin: 24px 0 10px;
+      padding-left: 12px;
+      border-left: 3px solid #c8a465;
+    }
+    /* カード内の大区切り。読み上げ順を自然にするため見出しレベルは h2 だが、
+       見た目は h3 と揃える（ページ見出しの h2 とは役割が違うため） */
+    .card > h2 {
+      color: #6b3f1a;
+      font-size: 1.05rem;
+      font-weight: normal;
+      margin: 0 0 10px;
+      padding: 0 0 0 12px;
+      border-bottom: none;
+      border-left: 3px solid #c8a465;
+      letter-spacing: normal;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e8dcc8;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .info-table th {
+      text-align: left;
+      background: #fdf5e8;
+      padding: 8px 14px;
+      border: 1px solid #e8dcc8;
+      font-weight: normal;
+      color: #6b3f1a;
+      width: 25%;
+      white-space: nowrap;
+    }
+    .info-table td {
+      padding: 8px 14px;
+      border: 1px solid #e8dcc8;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: #6b3f1a;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #4a2c0a; color: #fff; }
+    .section-lead {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid #e8dcc8;
+      margin: 32px 0;
+    }
+
+    
+.contact-form {
+  background: #fff;
+  border: 1px solid #e8dcc8;
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #6b3f1a;
+  margin-bottom: 6px;
+}
+.form-group .required {
+  color: #8b0000;
+  font-size: 0.78rem;
+  margin-left: 6px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #faf8f3;
+  box-sizing: border-box;
+}
+.form-group textarea {
+  height: 160px;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #c8a465;
+}
+.form-note {
+  font-size: 0.82rem;
+  color: #888;
+  margin-bottom: 24px;
+}
+.alert {
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 0.92rem;
+}
+.alert-success {
+  background: #eaf5ea;
+  border: 1px solid #a3d4a3;
+  color: #2d6a2d;
+}
+.alert-error {
+  background: #fdf0f0;
+  border: 1px solid #e8a0a0;
+  color: #8b0000;
+}
+/* 送信中は二度押しを防ぐ。押した手応えを見せるためのスピナー付き */
+#submit-btn[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}
+.spinner {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 8px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  vertical-align: -0.1em;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}
+.setup-note {
+  background: #fdf0f0;
+  border: 1px solid #e8a0a0;
+  color: #8b0000;
+  border-radius: 6px;
+  padding: 18px;
+  font-size: 0.9rem;
+  max-width: 640px;
+  margin: 0 auto 20px;
+}
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <h1 class="site-title">
+      <a href="index.html">
+        <small>黄檗宗 巌蔵山</small>
+        福寿寺
+      </a>
+    </h1>
+    
+  </div>
+</header>
+
+
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" >ホーム</a>
+    <a href="about.html" >縁起・歴史</a>
+    <a href="cultural-assets.html" >寺宝・文化財</a>
+    <a href="garden.html" >名勝庭園</a>
+    <a href="access.html" >交通案内</a>
+    <a href="contact.html" class="active">お問い合わせ</a>
+  </div>
+</nav>
+
+
+<main class="main-content">
+  
+<h2>お問い合わせ</h2>
+
+<p class="section-lead">
+  拝観・法事・その他のご相談はお気軽にお問い合わせください。<br>
+  お電話でのお問い合わせは <strong>0748-37-0688</strong> までどうぞ。
+</p>
+
+
+
+<div id="alert-area"></div>
+
+<div class="contact-form" id="form-wrap">
+  <p class="form-note">※ 印は必須項目です</p>
+  <form id="contact-form" novalidate>
+    
+    <div style="display:none;" aria-hidden="true">
+      <input type="text" name="website" value="" tabindex="-1" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label for="f-name">お名前<span class="required">※</span></label>
+      <input type="text" id="f-name" name="name" required maxlength="100" autocomplete="name">
+    </div>
+    <div class="form-group">
+      <label for="f-email">メールアドレス<span class="required">※</span></label>
+      <input type="email" id="f-email" name="email" required maxlength="200" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label for="f-message">お問い合わせ内容<span class="required">※</span></label>
+      <textarea id="f-message" name="message" required maxlength="2000"></textarea>
+    </div>
+    
+    <p class="form-note" style="margin:16px 0 12px;">
+      お預かりした個人情報は、お問い合わせへの回答とその記録のためにのみ利用いたします。
+      詳しくは<a href="privacy.html">個人情報の取扱いについて</a>をご覧ください。
+    </p>
+    <button type="submit" id="submit-btn" class="btn btn-primary" style="width:100%; padding:12px;">
+      送信する
+    </button>
+  </form>
+</div>
+
+<script>
+(function () {
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbysJ7rw__BCjNh-Y8SUMmRYEytSz4-voImuAgJo-FlzUw3A_zdDznDpfW94uXtgWAt7/exec";
+
+  var form   = document.getElementById('contact-form');
+  var wrap   = document.getElementById('form-wrap');
+  var btn    = document.getElementById('submit-btn');
+  var alerts = document.getElementById('alert-area');
+
+  function showAlert(kind, html) {
+    alerts.innerHTML = '<div class="alert alert-' + kind + '">' + html + '</div>';
+    alerts.scrollIntoView({ block: 'nearest' });
+  }
+
+  function busy(on) {
+    btn.disabled = on;
+    btn.innerHTML = on ? '<span class="spinner"></span>送信中…' : '送信する';
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!ENDPOINT) {
+      showAlert('error', '送信先が設定されていません。お手数ですが、お電話にてご連絡ください。');
+      return;
+    }
+
+    var name    = form.name.value.trim();
+    var email   = form.email.value.trim();
+    var message = form.message.value.trim();
+
+    var errors = [];
+    if (!name || name.length > 100) errors.push('お名前を100文字以内で入力してください。');
+    if (!email || email.length > 200 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      errors.push('正しいメールアドレスを入力してください。');
+    }
+    if (!message || message.length > 2000) errors.push('お問い合わせ内容を2000文字以内で入力してください。');
+    if (errors.length) {
+      showAlert('error', errors.map(function (e) {
+        return '<p style="margin:0 0 4px;">' + e + '</p>';
+      }).join(''));
+      return;
+    }
+
+    busy(true);
+
+    // Content-Type を text/plain にすることで CORS のプリフライト(OPTIONS)を発生させない。
+    // GAS はプリフライトに応答できないため、これを避けるのが要点。
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        message: message,
+        website: form.website.value
+      })
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data && data.result === 'success') {
+          wrap.style.display = 'none';
+          showAlert('success', 'お問い合わせを受け付けました。内容を確認の上、ご連絡いたします。');
+        } else if (data && data.reason === 'rate_limited') {
+          busy(false);
+          showAlert('error', '送信が集中しています。しばらく時間をおいてからお試しください。');
+        } else {
+          busy(false);
+          showAlert('error', '送信中にエラーが発生しました。お手数ですが、お電話にてご連絡ください。');
+        }
+      })
+      .catch(function () {
+        busy(false);
+        showAlert('error', '送信できませんでした。通信環境をご確認いただくか、お電話にてご連絡ください。');
+      });
+  });
+})();
+</script>
+
+</main>
+
+<footer class="site-footer">
+  <p>黄檗宗 巌蔵山 福寿寺</p>
+  <p>〒523-0022 滋賀県近江八幡市馬淵町469番地　TEL 0748-37-0688</p>
+  <p style="margin-top:12px; font-size:0.8rem;">
+    <a href="privacy.html">個人情報の取扱いについて</a>
+  </p>
+  <p style="margin-top:8px; font-size:0.75rem; color:#8a7a5a;">© 2026 宗教法人 福寿寺</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+secret_key.txt
+gmail_token.json
+gmail_credentials.json
+
+# 宛先アドレス・NotionページIDなどのローカル設定（.example のほうは公開する）
+local_config.json
+__pycache__/
+*.pyc
+
+# 檀家・過去帳などの機微情報は絶対に含めない
+*.db
+*.sqlite
+*.sqlite3
+nenkai_records.json
+
+# プレビュー用ビルド（モックフォーム入り。公開対象は docs/ のみ）
+docs_preview/
+
+# 内部向けドキュメント（NotionページID・住職への確認事項・判断経緯を含むため公開しない）
+TODO_HP.md
+REVIEW_*.md

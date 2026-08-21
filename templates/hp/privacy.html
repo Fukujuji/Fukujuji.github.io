@@ -1,0 +1,104 @@
+{# 個人情報の取扱いについて。
+   宗教団体が宗教活動（付随する活動を含む）の目的で扱う個人情報は
+   個人情報保護法57条1項3号により事業者の義務規定の適用外だが、
+   同条3項で自主的措置とその公表が努力義務とされている。
+   加えて当サイトは会場利用など宗教活動とは言い難い相談も受けるため、
+   適用除外の範囲を争うより明示しておくほうが確実、という判断で設置した。 #}
+{% extends "base.html" %}
+{% block title %}個人情報の取扱いについて ─ 福寿寺{% endblock %}
+{% block description %}福寿寺のウェブサイトにおける個人情報の取扱いについて。お問い合わせフォームでお預かりする情報の利用目的、保管方法、開示・訂正・削除のご請求方法をご案内しております。{% endblock %}
+{% block og_path %}privacy.html{% endblock %}
+{% block extra_style %}
+.policy {
+  background: #fff;
+  border: 1px solid #e8dcc8;
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.policy h3 {
+  margin-top: 28px;
+}
+.policy h3:first-of-type {
+  margin-top: 0;
+}
+.policy p {
+  font-size: 0.92rem;
+  line-height: 2;
+  margin-top: 8px;
+}
+.policy .addr {
+  font-size: 0.92rem;
+  line-height: 2;
+  margin-top: 8px;
+}
+.policy .enacted {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #e8dcc8;
+  font-size: 0.85rem;
+  color: #888;
+  text-align: right;
+}
+{% endblock %}
+
+{% block content %}
+<h2>個人情報の取扱いについて</h2>
+
+<p class="section-lead">
+  巌蔵山 福寿寺（以下「当山」）は、当ウェブサイトのお問い合わせフォームを通じて
+  お預かりする個人情報を、以下のとおり取り扱います。
+</p>
+
+<div class="policy">
+  <h3>取得する情報</h3>
+  <p>お名前、メールアドレス、お問い合わせ内容。</p>
+
+  <h3>利用目的</h3>
+  <p>
+    お問い合わせへの回答、およびその記録の保管のために利用いたします。
+    この目的以外には使用いたしません。
+  </p>
+
+  <h3>保管について</h3>
+  <p>
+    お預かりした内容は、当山が利用する電子メールサービス（Google LLC）および
+    クラウド記録サービス（Notion Labs, Inc.）上に保管いたします。
+    いずれも当山が管理するアカウント内に限られ、
+    これらの事業者が内容を独自に利用することはありません。
+  </p>
+
+  <h3>第三者への提供</h3>
+  <p>
+    法令に基づく場合を除き、ご本人の同意なく第三者へ提供することはございません。
+  </p>
+
+  <h3>開示・訂正・削除のご請求</h3>
+  <p>
+    ご自身の情報の開示、訂正、削除をご希望の場合は、下記までお電話にてお申し出ください。
+    ご本人であることを確認のうえ、速やかに対応いたします。
+  </p>
+
+  <h3>地図の表示について</h3>
+  <p>
+    <a href="/access">交通案内</a>のページでは Google マップを利用しております。
+    同ページの閲覧時、Google LLC に対して通信が発生いたします。
+  </p>
+
+  <h3>掲載内容の著作権</h3>
+  <p>
+    当ウェブサイトに掲載の写真および文章の権利は当山に帰属します。
+    無断での転載・複製はご遠慮ください。
+  </p>
+
+  <h3>お問い合わせ窓口</h3>
+  <p class="addr">
+    黄檗宗 巌蔵山 福寿寺<br>
+    〒523-0022　滋賀県近江八幡市馬淵町469番地<br>
+    TEL 0748-37-0688
+  </p>
+
+  <p class="enacted">制定日: 2026年8月20日</p>
+</div>
+{% endblock %}

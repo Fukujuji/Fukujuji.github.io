@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}寺宝・文化財 ─ 福寿寺{% endblock %}
+{% block description %}福寿寺に伝わる寺宝・文化財。国指定重要文化財の木造千手観音立像（嘉応二年・仏師長順作）、附指定の松枝双鳥鏡と紙本千手観音摺仏、鎌倉期の石燈籠、境内の磨崖仏をご紹介します。{% endblock %}
+{% block og_path %}cultural-assets.html{% endblock %}
+{% block extra_style %}
+.asset-main {
+  background: #fff;
+  border: 1px solid #e8dcc8;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.asset-main-img {
+  width: 100%;
+  height: 280px;
+}
+.asset-main-body {
+  padding: 28px;
+}
+.asset-main .badge-important {
+  display: inline-block;
+  background: #8b0000;
+  color: #fff;
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+.asset-main h3 {
+  border: none;
+  padding: 0;
+  font-size: 1.15rem;
+  margin: 0 0 12px;
+}
+.asset-sub {
+  background: #fdf5e8;
+  border: 1px solid #e8dcc8;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 0;
+}
+.asset-sub-img {
+  width: 180px;
+  flex-shrink: 0;
+}
+.asset-sub-body {
+  padding: 20px;
+}
+.asset-sub-body h3 {
+  margin-top: 0;
+  border-left-color: #c8a465;
+}
+.detail-list {
+  font-size: 0.9rem;
+  line-height: 2;
+}
+.detail-list dt {
+  color: #6b3f1a;
+  font-weight: bold;
+  display: inline;
+}
+.detail-list dt::after { content: '：'; }
+.detail-list dd {
+  display: inline;
+  margin: 0;
+}
+.detail-list dd::after { content: '\A'; white-space: pre; }
+.stone-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.stone-row .card {
+  flex: 1;
+  min-width: 240px;
+}
+{% endblock %}
+
+{% block content %}
+<h2>寺宝・文化財</h2>
+
+<p class="section-lead">
+  福寿寺には国指定重要文化財をはじめ、千二百年の歴史を物語る貴重な文化財が伝わっています。
+</p>
+
+<div class="asset-main">
+  <img class="asset-main-img" src="{{ url_for('static', filename='hp/img/kannon_close.jpg') }}" alt="本尊 千手観音立像" style="object-fit:cover;">
+  <div class="asset-main-body">
+    <span class="badge-important">国指定重要文化財</span>
+    <h3>本尊　木造千手観音立像</h3>
+    <p style="font-size:0.88rem; color:#888; margin-bottom:14px;">通称「いわくらさん」「いわくら観音」</p>
+
+    <dl class="detail-list">
+      <dt>指定</dt><dd>国指定重要文化財（彫刻）　明治44年（1911年）8月9日指定</dd>
+      <dt>時代</dt><dd>平安時代　嘉応2年（1170）造仏</dd>
+      <dt>作者</dt><dd>仏師・僧 長順（像内に造立銘あり）</dd>
+      <dt>像高</dt><dd>106.5cm（カヤ系一材、前後割矧ぎ・内刳）</dd>
+      <dt>発願者</dt><dd>在地豪族 中原貞俊をはじめ、一族の女性・子供も含む数十人</dd>
+    </dl>
+
+    <p style="margin-top:16px; font-size:0.9rem;">
+      後白河法皇の御代、この地の豪族 中原朝臣の一族数十人が名を連ねて千手十一面観音像を刻成し、
+      山上の福寿寺に納めました。平安後期様式を示しつつ、厳しい風貌・量感表現は
+      鎌倉彫刻への移行期を物語る貴重な作例です。
+    </p>
+    <p style="margin-top:10px; font-size:0.9rem;">
+      拝観をご希望の方は<a href="/contact">お問い合わせフォーム</a>よりご連絡ください。
+    </p>
+  </div>
+</div>
+
+<div class="asset-sub">
+  <img class="asset-sub-img" src="{{ url_for('static', filename='hp/img/mirror_kagami.jpg') }}" alt="松枝双鳥鏡" style="min-height:140px; width:180px; object-fit:cover;" loading="lazy">
+  <div class="asset-sub-body">
+    <span style="display:inline-block; background:#6b3f1a; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:3px; margin-bottom:8px;">附指定重要文化財</span>
+    <h3>松枝双鳥鏡</h3>
+    <p style="font-size:0.9rem;">
+      千手観音立像の附指定品。鏡面に千手観音の種子が刻まれた和鏡。<br>
+      大正時代の本尊修理の際に胎内から発見されました。
+    </p>
+  </div>
+</div>
+
+<div class="asset-sub">
+  <img class="asset-sub-img" src="{{ url_for('static', filename='hp/img/surihotoke.jpg') }}" alt="紙本千手観音摺仏" style="min-height:140px; width:180px; object-fit:cover;" loading="lazy">
+  <div class="asset-sub-body">
+    <span style="display:inline-block; background:#6b3f1a; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:3px; margin-bottom:8px;">附指定重要文化財</span>
+    <h3>紙本千手観音摺仏</h3>
+    <p style="font-size:0.9rem;">
+      千手観音立像の附指定品。版木による千手観音の刷り物。<br>
+      本尊胎内に納入されていたもので、大正時代の修理時に確認されました。
+    </p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="stone-row">
+  <div class="card">
+    <!-- 縦長写真のため object-position で笠〜火袋が収まる位置に寄せている -->
+    <img src="{{ url_for('static', filename='hp/img/ishidoro_toro.jpg') }}" alt="鎌倉期の六角形石燈籠" style="width:100%; height:160px; object-fit:cover; object-position:51% 24%; border-radius:6px; margin-bottom:14px; display:block;" loading="lazy">
+    <h3 style="margin-top:0;">石燈籠</h3>
+    <p style="font-size:0.9rem;">
+      本堂前南方に立つ鎌倉期の六角形石燈籠。<strong>正中2年（1325年）</strong>の刻銘があります。
+    </p>
+  </div>
+  <div class="card">
+    <img src="{{ url_for('static', filename='hp/img/ishidoro.jpg') }}" alt="岩倉山 石積遺構" style="width:100%; height:160px; object-fit:cover; border-radius:6px; margin-bottom:14px; display:block;" loading="lazy">
+    <h3 style="margin-top:0;">岩倉山の石材</h3>
+    <p style="font-size:0.9rem;">
+      寺が立地する岩倉山は良質な花崗岩の産地で、「<strong>長福寺みかげ</strong>」と呼ばれる銘石として知られます。
+      江戸初期には大阪城築城に多くの石材が供給されました。
+      境内には僧房跡と推定される石積の遺構が広範囲に残っています。
+    </p>
+  </div>
+  <div class="card">
+    <img src="{{ url_for('static', filename='hp/img/magaibutsu.jpg') }}" alt="境内の磨崖仏" style="width:100%; height:160px; object-fit:cover; border-radius:6px; margin-bottom:14px; display:block;" loading="lazy">
+    <h3 style="margin-top:0;">磨崖仏</h3>
+    <p style="font-size:0.9rem;">
+      境内の岩肌には、仏像が直に刻まれた<strong>磨崖仏</strong>が遺されています。
+      花崗岩の岩倉山ならではの信仰の跡です。
+    </p>
+  </div>
+</div>
+{% endblock %}

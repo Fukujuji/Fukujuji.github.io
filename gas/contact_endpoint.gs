@@ -344,41 +344,64 @@ function checkSetup() {
   console.log('本日の残り送信可能数: ' + MailApp.getRemainingDailyQuota());
 
   // Notionトークンの接続範囲を点検する。
-  // 専用インテグレーションなら「お問い合わせ記録」1件だけが見えるはず。
-  // 檀家名簿など他ページまで見えるなら、公開サイトのバックエンドには過大な権限。
+  // 専用インテグレーションなら、記録先ページとその配下（＝過去の問い合わせ）しか見えないはず。
+  // 檀家名簿など無関係のページまで見えるなら、公開サイトのバックエンドには過大な権限。
   var token = props.getProperty('NOTION_TOKEN');
+  var pageId = props.getProperty('NOTION_PAGE_ID');
   if (!token) { console.log('NOTION_TOKEN 未設定のため接続範囲は確認しません'); return; }
+  if (!pageId) { console.log('NOTION_PAGE_ID 未設定のため接続範囲は判定できません'); return; }
   try {
     var res = UrlFetchApp.fetch('https://api.notion.com/v1/search', {
       method: 'post',
       contentType: 'application/json',
       headers: { 'Authorization': 'Bearer ' + token, 'Notion-Version': '2022-06-28' },
-      payload: JSON.stringify({ page_size: 20 }),
+      payload: JSON.stringify({ page_size: 100 }),
       muteHttpExceptions: true
     });
     var body = JSON.parse(res.getContentText());
     var items = body.results || [];
-    console.log('--- このトークンで見えるNotionページ (' + items.length +
-                '件' + (body.has_more ? '以上' : '') + ') ---');
-    items.forEach(function (o) {
-      var title = '(無題)';
+
+    // /v1/search は「接続されたページ」だけでなく**その子ページも返す**。
+    // お問い合わせは記録先の直下にサブページとして積み上がるので、
+    // 単純な件数比較だと問い合わせが1件入っただけで誤検知する。
+    // 記録先ページ自身と、その直下の子は正常なので除外し、
+    // それ以外（＝接続範囲が広すぎる証拠）が出たときだけ警告する。
+    var norm = function (s) { return String(s || '').replace(/-/g, ''); };
+    var parentId = norm(pageId);
+    var foreign = items.filter(function (o) {
+      if (norm(o.id) === parentId) return false;                 // 記録先ページ自身
+      var p = o.parent || {};
+      return norm(p.page_id || p.database_id) !== parentId;      // 記録先の直下の子
+    });
+
+    console.log('--- このトークンで見えるNotion項目: ' + items.length + '件' +
+                (body.has_more ? '以上' : '') +
+                '（うち記録先とその配下を除くと ' + foreign.length + '件） ---');
+    var titleOf = function (o) {
       try {
         if (o.object === 'page') {
           for (var k in o.properties) {
             if (o.properties[k].type === 'title') {
-              title = o.properties[k].title.map(function (x) { return x.plain_text; }).join('');
-              break;
+              return o.properties[k].title.map(function (x) { return x.plain_text; }).join('');
             }
           }
         } else {
-          title = (o.title || []).map(function (x) { return x.plain_text; }).join('');
+          return (o.title || []).map(function (x) { return x.plain_text; }).join('');
         }
       } catch (ignore) {}
-      console.log('  [' + o.object + '] ' + title);
+      return '(無題)';
+    };
+    items.forEach(function (o) {
+      var mark = foreign.indexOf(o) > -1 ? '★ ' : '   ';
+      console.log('  ' + mark + '[' + o.object + '] ' + titleOf(o));
     });
-    if (items.length > 1 || body.has_more) {
-      console.warn('★ お問い合わせ記録以外のページが見えています。' +
-                   '専用インテグレーションに差し替え、接続先を絞ってください。');
+
+    if (foreign.length > 0) {
+      console.warn('★ 記録先と無関係のページが ' + foreign.length + '件見えています。' +
+                   'このトークンは接続範囲が広すぎます。' +
+                   'お問い合わせ記録だけに接続した専用インテグレーションに差し替えてください。');
+    } else {
+      console.log('OK: 記録先ページとその配下しか見えていません。');
     }
   } catch (e) {
     console.error('接続範囲の確認に失敗: ' + e);

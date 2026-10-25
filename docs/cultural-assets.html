@@ -24,6 +24,7 @@
   
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
+  
   <link rel="canonical" href="https://fukujuji.github.io/cultural-assets.html">
 
   <link rel="icon" href="static/favicon.ico" sizes="any">
@@ -62,7 +63,7 @@
     .site-title a { color: #f5efe6; text-decoration: none; }
     .site-title small {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       color: #c8a465;
       letter-spacing: 0.05em;
     }
@@ -127,6 +128,9 @@
       line-height: 1.6;
     }
     .site-footer a { color: #e8dcc8; }
+    /* 単独で置かれたリンクなので、指で押しやすい高さを確保する */
+    .site-footer p > a { display: inline-block; padding: 6px 4px; }
+    .nowrap { white-space: nowrap; }
 
     /* ── 共通パーツ ── */
     h2 {
@@ -249,7 +253,13 @@
 }
 .asset-sub-img {
   width: 180px;
+  min-height: 140px;
   flex-shrink: 0;
+}
+/* スマホでは横並びだと本文欄が1行5〜6文字まで細るため、写真を上に置く */
+@media (max-width: 640px) {
+  .asset-sub { flex-direction: column; }
+  .asset-sub-img { width: 100%; height: 220px; }
 }
 .asset-sub-body {
   padding: 20px;
@@ -326,7 +336,7 @@
   <div class="asset-main-body">
     <span class="badge-important">国指定重要文化財</span>
     <h3>本尊　木造千手観音立像</h3>
-    <p style="font-size:0.88rem; color:#888; margin-bottom:14px;">通称「いわくらさん」「いわくら観音」</p>
+    <p style="font-size:0.88rem; color:#717171; margin-bottom:14px;">通称「いわくらさん」「いわくら観音」</p>
 
     <dl class="detail-list">
       <dt>指定</dt><dd>国指定重要文化財（彫刻）　明治44年（1911年）8月9日指定</dd>
@@ -348,7 +358,7 @@
 </div>
 
 <div class="asset-sub">
-  <img class="asset-sub-img" src="static/hp/img/mirror_kagami.jpg" alt="松枝双鳥鏡" style="min-height:140px; width:180px; object-fit:cover;" loading="lazy">
+  <img class="asset-sub-img" src="static/hp/img/mirror_kagami.jpg" alt="松枝双鳥鏡" style="object-fit:cover;" loading="lazy">
   <div class="asset-sub-body">
     <span style="display:inline-block; background:#6b3f1a; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:3px; margin-bottom:8px;">附指定重要文化財</span>
     <h3>松枝双鳥鏡</h3>
@@ -360,7 +370,7 @@
 </div>
 
 <div class="asset-sub">
-  <img class="asset-sub-img" src="static/hp/img/surihotoke.jpg" alt="紙本千手観音摺仏" style="min-height:140px; width:180px; object-fit:cover;" loading="lazy">
+  <img class="asset-sub-img" src="static/hp/img/surihotoke.jpg" alt="紙本千手観音摺仏" style="object-fit:cover;" loading="lazy">
   <div class="asset-sub-body">
     <span style="display:inline-block; background:#6b3f1a; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:3px; margin-bottom:8px;">附指定重要文化財</span>
     <h3>紙本千手観音摺仏</h3>
@@ -405,11 +415,11 @@
 
 <footer class="site-footer">
   <p>黄檗宗 巌蔵山 福寿寺</p>
-  <p>〒523-0022 滋賀県近江八幡市馬淵町469番地　TEL 0748-37-0688</p>
+  <p>〒523-0022 滋賀県近江八幡市馬淵町469番地　<span class="nowrap">TEL 0748-37-0688</span></p>
   <p style="margin-top:12px; font-size:0.8rem;">
     <a href="privacy.html">個人情報の取扱いについて</a>
   </p>
-  <p style="margin-top:8px; font-size:0.75rem; color:#8a7a5a;">© 2026 宗教法人 福寿寺</p>
+  <p style="margin-top:8px; font-size:0.75rem; color:#a59980;">© 2026 宗教法人 福寿寺</p>
 </footer>
 
 </body>

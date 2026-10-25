@@ -4,6 +4,7 @@
 {% block title %}ページが見つかりません ─ 福寿寺{% endblock %}
 {% block description %}お探しのページは見つかりませんでした。福寿寺のホームページよりお探しください。{% endblock %}
 {% block og_path %}404.html{% endblock %}
+{% block canonical %}<meta name="robots" content="noindex">{% endblock %}
 {% block extra_style %}
 .notfound {
   text-align: center;
@@ -11,7 +12,7 @@
 }
 .notfound .code {
   font-size: 3.2rem;
-  color: #c8a465;
+  color: #aa8b56;
   letter-spacing: 0.15em;
   margin-bottom: 8px;
 }

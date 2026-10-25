@@ -43,7 +43,13 @@
 }
 .asset-sub-img {
   width: 180px;
+  min-height: 140px;
   flex-shrink: 0;
+}
+/* スマホでは横並びだと本文欄が1行5〜6文字まで細るため、写真を上に置く */
+@media (max-width: 640px) {
+  .asset-sub { flex-direction: column; }
+  .asset-sub-img { width: 100%; height: 220px; }
 }
 .asset-sub-body {
   padding: 20px;
@@ -90,7 +96,7 @@
   <div class="asset-main-body">
     <span class="badge-important">国指定重要文化財</span>
     <h3>本尊　木造千手観音立像</h3>
-    <p style="font-size:0.88rem; color:#888; margin-bottom:14px;">通称「いわくらさん」「いわくら観音」</p>
+    <p style="font-size:0.88rem; color:#717171; margin-bottom:14px;">通称「いわくらさん」「いわくら観音」</p>
 
     <dl class="detail-list">
       <dt>指定</dt><dd>国指定重要文化財（彫刻）　明治44年（1911年）8月9日指定</dd>
@@ -112,7 +118,7 @@
 </div>
 
 <div class="asset-sub">
-  <img class="asset-sub-img" src="{{ url_for('static', filename='hp/img/mirror_kagami.jpg') }}" alt="松枝双鳥鏡" style="min-height:140px; width:180px; object-fit:cover;" loading="lazy">
+  <img class="asset-sub-img" src="{{ url_for('static', filename='hp/img/mirror_kagami.jpg') }}" alt="松枝双鳥鏡" style="object-fit:cover;" loading="lazy">
   <div class="asset-sub-body">
     <span style="display:inline-block; background:#6b3f1a; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:3px; margin-bottom:8px;">附指定重要文化財</span>
     <h3>松枝双鳥鏡</h3>
@@ -124,7 +130,7 @@
 </div>
 
 <div class="asset-sub">
-  <img class="asset-sub-img" src="{{ url_for('static', filename='hp/img/surihotoke.jpg') }}" alt="紙本千手観音摺仏" style="min-height:140px; width:180px; object-fit:cover;" loading="lazy">
+  <img class="asset-sub-img" src="{{ url_for('static', filename='hp/img/surihotoke.jpg') }}" alt="紙本千手観音摺仏" style="object-fit:cover;" loading="lazy">
   <div class="asset-sub-body">
     <span style="display:inline-block; background:#6b3f1a; color:#fff; font-size:0.75rem; padding:2px 8px; border-radius:3px; margin-bottom:8px;">附指定重要文化財</span>
     <h3>紙本千手観音摺仏</h3>

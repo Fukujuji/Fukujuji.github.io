@@ -24,6 +24,7 @@
   
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
+  
   <link rel="canonical" href="https://fukujuji.github.io/">
 
   <link rel="icon" href="static/favicon.ico" sizes="any">
@@ -62,7 +63,7 @@
     .site-title a { color: #f5efe6; text-decoration: none; }
     .site-title small {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       color: #c8a465;
       letter-spacing: 0.05em;
     }
@@ -127,6 +128,9 @@
       line-height: 1.6;
     }
     .site-footer a { color: #e8dcc8; }
+    /* 単独で置かれたリンクなので、指で押しやすい高さを確保する */
+    .site-footer p > a { display: inline-block; padding: 6px 4px; }
+    .nowrap { white-space: nowrap; }
 
     /* ── 共通パーツ ── */
     h2 {
@@ -246,12 +250,14 @@
   text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 .hero .sub {
-  color: #c8a465;
+  color: #e2c98f;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
   font-size: 0.95rem;
   letter-spacing: 0.15em;
 }
 .hero .lead {
   margin-top: 16px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
   font-size: 0.92rem;
   color: #eee;
   line-height: 2;
@@ -450,11 +456,11 @@
 
 <footer class="site-footer">
   <p>黄檗宗 巌蔵山 福寿寺</p>
-  <p>〒523-0022 滋賀県近江八幡市馬淵町469番地　TEL 0748-37-0688</p>
+  <p>〒523-0022 滋賀県近江八幡市馬淵町469番地　<span class="nowrap">TEL 0748-37-0688</span></p>
   <p style="margin-top:12px; font-size:0.8rem;">
     <a href="privacy.html">個人情報の取扱いについて</a>
   </p>
-  <p style="margin-top:8px; font-size:0.75rem; color:#8a7a5a;">© 2026 宗教法人 福寿寺</p>
+  <p style="margin-top:8px; font-size:0.75rem; color:#a59980;">© 2026 宗教法人 福寿寺</p>
 </footer>
 
 </body>

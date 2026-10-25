@@ -238,12 +238,12 @@
 {% block navigation %}
 <nav class="main-nav">
   <div class="nav-inner">
-    <a href="/" {% if request.path == '/' %}class="active"{% endif %}>ホーム</a>
-    <a href="/about" {% if request.path == '/about' %}class="active"{% endif %}>縁起・歴史</a>
-    <a href="/cultural-assets" {% if '/cultural-assets' in request.path %}class="active"{% endif %}>寺宝・文化財</a>
-    <a href="/garden" {% if request.path == '/garden' %}class="active"{% endif %}>名勝庭園</a>
-    <a href="/access" {% if request.path == '/access' %}class="active"{% endif %}>交通案内</a>
-    <a href="/contact" {% if request.path == '/contact' %}class="active"{% endif %}>お問い合わせ</a>
+    <a href="/" {% if request.path == '/' %}class="active" aria-current="page"{% endif %}>ホーム</a>
+    <a href="/about" {% if request.path == '/about' %}class="active" aria-current="page"{% endif %}>縁起・歴史</a>
+    <a href="/cultural-assets" {% if '/cultural-assets' in request.path %}class="active" aria-current="page"{% endif %}>寺宝・文化財</a>
+    <a href="/garden" {% if request.path == '/garden' %}class="active" aria-current="page"{% endif %}>名勝庭園</a>
+    <a href="/access" {% if request.path == '/access' %}class="active" aria-current="page"{% endif %}>交通案内</a>
+    <a href="/contact" {% if request.path == '/contact' %}class="active" aria-current="page"{% endif %}>お問い合わせ</a>
   </div>
 </nav>
 {% endblock %}

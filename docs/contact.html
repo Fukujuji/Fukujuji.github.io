@@ -254,7 +254,10 @@
 }
 .form-group input:focus,
 .form-group textarea:focus {
-  outline: none;
+  /* 淡い金色の枠だけでは背景との差が小さく（2.3:1）、入力中の欄が分かりにくいため
+     濃い茶の枠を重ねる（3:1以上が目安） */
+  outline: 2px solid #6b3f1a;
+  outline-offset: 1px;
   border-color: #c8a465;
 }
 .form-note {
@@ -334,7 +337,7 @@
     <a href="cultural-assets.html" >寺宝・文化財</a>
     <a href="garden.html" >名勝庭園</a>
     <a href="access.html" >交通案内</a>
-    <a href="contact.html" class="active">お問い合わせ</a>
+    <a href="contact.html" class="active" aria-current="page">お問い合わせ</a>
   </div>
 </nav>
 

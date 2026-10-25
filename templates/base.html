@@ -31,7 +31,7 @@
      X-Frame-Options は meta では機能しない（ヘッダ専用）。 #}
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <link rel="canonical" href="{{ site_base_url }}/{{ self.og_path() }}">
+  {% block canonical %}<link rel="canonical" href="{{ site_base_url }}/{{ self.og_path() }}">{% endblock %}{# 404.html では上書きして canonical を外し noindex にする #}
 
   <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon-32.png') }}" sizes="32x32">

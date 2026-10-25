@@ -63,7 +63,7 @@
     .site-title a { color: #f5efe6; text-decoration: none; }
     .site-title small {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       color: #c8a465;
       letter-spacing: 0.05em;
     }
@@ -183,9 +183,11 @@
       padding: 8px 14px;
       border: 1px solid #e8dcc8;
     }
+    /* スマホで押しやすいよう高さ44px以上を確保する（Apple/Googleの推奨値） */
     .btn {
       display: inline-block;
-      padding: 8px 20px;
+      min-height: 44px;
+      padding: 10px 20px;
       border: none;
       border-radius: 4px;
       font-family: inherit;
